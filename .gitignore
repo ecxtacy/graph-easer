@@ -22,8 +22,6 @@ build/
 
 # TypeScript
 *.tsbuildinfo
-tsconfig.json
-tsconfig.tsbuildinfo
 
 # Logs and temporary files
 *.log
@@ -64,3 +62,6 @@ server/build/
 # Ignore all the following files unless explicitly added
 *.swp
 *~
+
+# Custom ignores
+_ignore_*
