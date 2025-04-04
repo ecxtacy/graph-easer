@@ -55,7 +55,6 @@ Dockerfile.*
 .env.*.local
 
 # build directories for various frameworks
-public/
 client/build/
 server/build/
 
