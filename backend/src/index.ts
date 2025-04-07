@@ -3,12 +3,16 @@ import express from "express";
 import v1Router from "./routers/v1Router";
 import helmet from "helmet";
 import morgan from "morgan";
+import corsConfig from "./config/server_config";
+import cors from "cors";
 
 // Initialize the app
 const app = express();
 
+app.use(cors(corsConfig));
+
 // todo: fix port number through ENV
-const port = 3000;
+const port = 3001;
 
 app.use(express.json());
 app.use(helmet());
