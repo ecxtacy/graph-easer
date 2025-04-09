@@ -8,6 +8,7 @@ import { useAtom } from 'jotai';
 import React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { Stage, Layer, Text, Circle } from 'react-konva';
+import Edge from './graph/Edge';
 
 const Canvas = () => {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -36,15 +37,19 @@ const Canvas = () => {
   return (
     <div className='mx-auto w-5xl h-[32rem]' ref={stageRef}>
       <Stage className={clsx(`mx-auto mt-8 bg-amber-50 flex-grow rounded-xl`)} width={canvasDetails.width} height={canvasDetails.height}>
+        
         <Layer>
-        {/* <Rect
-          x={100}          // X coordinate of the top-left corner
-          y={100}          // Y coordinate of the top-left corner
-          width={200}      // Width of the rectangle
-          height={100}     // Height of the rectangle
-          fill="blue"      // Fill color of the rectangle
-          shadowBlur={10}  // Optional shadow for the rectangle
-        /> */}
+          {edgeList && nodeCoordinates && Array.from(edgeList).map((edge, idx) => {
+            console.log("HEELO MITTHU")
+            let [node1, node2] = edge.split("-").map((val) => parseInt(val));
+            console.log(node1, node2)
+            return <Edge a={nodeCoordinates[node1]} b={nodeCoordinates[node2]} />
+          })}
+        </Layer>
+        
+        <Layer>
+        
+
           {edgeList && nodeCoordinates && nodeCoordinates.map(
             (point, index) => {
           console.log(point);
@@ -54,7 +59,7 @@ const Canvas = () => {
             key={index}
             x={point.x}
             y={point.y}
-            radius={7.5}
+            radius={10}
             fill="red"
           />
           {
