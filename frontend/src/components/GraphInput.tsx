@@ -1,7 +1,10 @@
 "use client";
+import { adjListAtom, edgeListAtom } from '@/atoms/graph';
 import { InitGraphInterface } from '@/interfaces/InitGraphData';
 import API from '@/lib/api';
-import React, { useRef, useState } from 'react'
+import { generateEdgeList } from '@/lib/graphRenderer';
+import { useAtom } from 'jotai';
+import React, { useEffect, useRef, useState } from 'react'
 
 interface ErrorStateInterface {
   message: string | null;
@@ -11,9 +14,20 @@ const GraphInput = () => {
 
   const formRef = useRef<HTMLFormElement>(null);
 
+  const [adjList, setAdjList] = useAtom(adjListAtom);
+  const [, setEdgeList] = useAtom(edgeListAtom);
   const [error, setError] = useState<ErrorStateInterface>({
     message: null,
   });
+
+  useEffect(() => {
+    if(adjList !== null) {
+      const edgeList = generateEdgeList(adjList);
+      setEdgeList(edgeList);
+      console.log("EDGE LIST:")
+      console.log(edgeList)
+    }
+  }, [adjList])
 
   const handleGraphGeneration = async () => {
     const form = formRef.current;
@@ -43,8 +57,9 @@ const GraphInput = () => {
       });
 
       const respData = await resp.json();
-      console.log(respData);
 
+      const adjacencyList = respData.adjList;
+      setAdjList(adjacencyList);
     } else {
       setError({
         message: "Kindly enter a number."
