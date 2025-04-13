@@ -1,8 +1,5 @@
+import { EndNodeFound } from "../../interfaces/EndNodeFound";
 import { DisplayEdge } from "./displayEdge";
-
-interface DfsStatus {
-  endNodeFound: boolean;
-}
 
 export const dfs = (
   adjList: number[][],
@@ -12,7 +9,7 @@ export const dfs = (
   let N = adjList.length;
   let visited: boolean[] = new Array(N).fill(false);
   let displayEdgeArray: DisplayEdge[] = [];
-  let dfsStatus: DfsStatus = {
+  let dfsStatus: EndNodeFound = {
     endNodeFound: false,
   };
 
@@ -39,7 +36,7 @@ const dfs_recurse = (
   node: number,
   visited: boolean[],
   endNode: number,
-  dfsStatus: DfsStatus,
+  dfsStatus: EndNodeFound,
   displayEdgeArray: DisplayEdge[]
 ) => {
   visited[node] = true;

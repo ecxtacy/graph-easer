@@ -1,9 +1,6 @@
+import { EndNodeFound } from "../../interfaces/EndNodeFound";
 import { Queue } from "../data_structures/queue";
 import { DisplayEdge } from "./displayEdge";
-
-interface BfsStatus {
-  endNodeFound: boolean;
-}
 
 export const bfs = (
   adjList: number[][],
@@ -17,7 +14,7 @@ export const bfs = (
   let parent: number[] = new Array(N).fill(0);
 
   // todo : BfsStatus and DfsStatus is same. Make a common interface for checking if the endNode is found or not
-  let bfsStatus: BfsStatus = {
+  let bfsStatus: EndNodeFound = {
     endNodeFound: false,
   };
 
@@ -47,7 +44,7 @@ const bfs_implement = (
   visited: boolean[],
   parent: number[],
   displayEdgeArray: DisplayEdge[],
-  bfsStatus: BfsStatus
+  bfsStatus: EndNodeFound
 ) => {
   if (startNode === endNode) {
     bfsStatus.endNodeFound = true;
