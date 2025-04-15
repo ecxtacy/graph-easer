@@ -13,12 +13,11 @@ export const bfs = (
   let displayEdgeArray: DisplayEdge[] = [];
   let parent: number[] = new Array(N).fill(0);
 
-  // todo : BfsStatus and DfsStatus is same. Make a common interface for checking if the endNode is found or not
   let bfsStatus: EndNodeFound = {
     endNodeFound: false,
   };
 
-  bfs_implement(
+  bfs_implementation(
     adjList,
     startNode,
     endNode,
@@ -36,7 +35,7 @@ export const bfs = (
   } else return displayEdgeArray;
 };
 
-const bfs_implement = (
+const bfs_implementation = (
   adjList: number[][],
   startNode: number,
   endNode: number,
