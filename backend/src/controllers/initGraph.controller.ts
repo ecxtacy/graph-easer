@@ -4,6 +4,7 @@ import {
   InitGraphInterface,
 } from "../interfaces/InitGraphData";
 import { generateGraph } from "../lib/graph/initGraph";
+import { StatusCodes, StatusMessage } from "../utils/statusCodes";
 
 export const initGraph = (req: Request, res: Response) => {
   const requestData: InitGraphInterface = req.body as InitGraphInterface;
@@ -11,13 +12,18 @@ export const initGraph = (req: Request, res: Response) => {
 
   if (!success) {
     // todo: make this modular and clean
-    res.status(400).json("Bad Data sent");
+    res.status(StatusCodes.BAD_REQUEST).json({
+      success: false,
+      message: StatusMessage[StatusCodes.BAD_REQUEST],
+    });
     return;
   }
 
   const adjList = generateGraph(data);
 
-  res.status(200).json({
+  res.status(StatusCodes.SUCCESS).json({
+    success: true,
+    message: StatusMessage[StatusCodes.SUCCESS],
     adjList,
   });
 };
