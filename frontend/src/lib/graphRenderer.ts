@@ -1,6 +1,4 @@
-import { edgeListAtom } from "@/atoms/graph";
 import { NodePoint } from "@/interfaces/NodePoint";
-import { useAtom } from "jotai";
 
 export const generateEdgeList = (adjList: number[][]) => {
   let edgeList: Set<string> = new Set();
